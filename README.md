@@ -5,7 +5,7 @@
 **Curso:** Ciência da Computação  
 **Disciplina:** Engenharia de Software  
 **Semestre:** 2026.1  
-**Professor:** (Adicionar nome do professor)
+**Professor:** Edeilson Milhomem da Silva
 
 ---
 
