@@ -11,17 +11,8 @@
 
 <?php
 
-if(file_exists("tarefas.json")){
-    $json = file_get_contents("tarefas.json");
-    $tarefas = json_decode($json, true);
-}else{
-    $tarefas = [];
-}
-
-/* ordenar tarefas: pendentes primeiro */
-usort($tarefas, function($a, $b){
-    return $a["concluida"] <=> $b["concluida"];
-});
+$json = file_get_contents("tarefas.json");
+$tarefas = json_decode($json, true);
 
 if(empty($tarefas)){
 
