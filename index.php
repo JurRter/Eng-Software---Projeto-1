@@ -1,16 +1,26 @@
 <?php
 
+if(file_exists("tarefas.json")){
     $json = file_get_contents("tarefas.json");
-
     $tarefas = json_decode($json, true);
+}else{
+    $tarefas = [];
+}
 
+if(empty($tarefas)){
+
+    echo "<div class='vazio'>";
+    echo "<h2>Nenhuma tarefa a fazer</h2>";
+    echo "</div>";
+
+}else{
 
     foreach($tarefas as $tarefa){
 
         $classe = "";
 
         if($tarefa["concluida"]){
-        $classe = "concluida";
+            $classe = "concluida";
         }
 
         echo "<div class='card $classe'>";
@@ -18,18 +28,15 @@
         echo "<h3>".$tarefa["nome"]."</h3>";
 
         if($tarefa["concluida"]){
-        echo "<p>✅ Concluída</p>";
+            echo "<p>✅ Concluída</p>";
         }else{
-        echo "<p>⏳ Pendente</p>";
+            echo "<p>⏳ Pendente</p>";
         }
 
         echo "</div>";
+    }
 
-        }
-
-
-
-
+}
 
 ?>
 
