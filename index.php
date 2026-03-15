@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Gerenciamento de Tarefas</title>
+</head>
+
+<body>
+
 <?php
 
 if(file_exists("tarefas.json")){
@@ -16,7 +27,11 @@ if(empty($tarefas)){
 
     echo "<div class='vazio'>";
     echo "<h2>Nenhuma tarefa a fazer</h2>";
+    echo "<a href='criar_tarefa.php'>
+            <button class='botao-central'>Criar tarefa</button>
+          </a>";
     echo "</div>";
+
 
 }else{
 
@@ -43,27 +58,14 @@ if(empty($tarefas)){
         echo "</div>";
     }
 
+    echo "</div>";
+
+    echo "<a href='criar_tarefa.php'>
+            <button class='botao-criar'>Criar tarefa</button>
+          </a>";
 }
 
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-
-    <a href="criar_tarefa.php">
-        <button>Criar tarefa</button>
-    </a>
-
-
-
-
 </body>
 </html>
-
