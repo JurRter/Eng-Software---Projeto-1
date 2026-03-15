@@ -18,6 +18,11 @@ if(file_exists("tarefas.json")){
     $tarefas = [];
 }
 
+/* ordenar tarefas: pendentes primeiro */
+usort($tarefas, function($a, $b){
+    return $a["concluida"] <=> $b["concluida"];
+});
+
 if(empty($tarefas)){
 
     echo "<div class='vazio'>";
@@ -27,8 +32,9 @@ if(empty($tarefas)){
           </a>";
     echo "</div>";
 
-
 }else{
+
+    echo "<div class='container'>";
 
     foreach($tarefas as $tarefa){
 
@@ -59,6 +65,5 @@ if(empty($tarefas)){
 }
 
 ?>
-
 </body>
 </html>
