@@ -54,7 +54,11 @@ body{
     flex-wrap:wrap;
     gap:30px;
     row-gap:35px;
+<<<<<<< HEAD
     max-width:900px;
+=======
+    
+>>>>>>> 661425500058c5573349781116996a8ed9be9257
 }
 
 /* card da tarefa */
@@ -62,6 +66,10 @@ body{
     background:white;
     width:220px;
     padding:20px;
+<<<<<<< HEAD
+=======
+    margin: 20px;
+>>>>>>> 661425500058c5573349781116996a8ed9be9257
     border-radius:12px;
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
     transition:transform 0.2s;
