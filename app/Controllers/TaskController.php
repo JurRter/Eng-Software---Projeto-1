@@ -9,12 +9,16 @@ class TaskController extends BaseController {
     private $model;
 
     public function __construct() {
-        $this->precisaLogar(); // Agora tem que estar logado!
+        $this->precisaLogar();
         $this->model = new TaskModel();
     }
 
+    private function getUsuario() {
+        return $_SESSION['usuario'] ?? '';
+    }
+
     public function index() {
-        $tarefas = $this->model->todos();
+        $tarefas = $this->model->todos($this->getUsuario());
         $this->view('tasks/index', ['tarefas' => $tarefas]);
     }
 
@@ -23,9 +27,9 @@ class TaskController extends BaseController {
     }
 
     public function salvar() {
-        $nome = $_POST['nome'] ?? '';
+        $nome = trim($_POST['nome'] ?? '');
         if ($nome != '') {
-            $this->model->criar($nome);
+            $this->model->criar($nome, $this->getUsuario());
         }
         $this->voltar('/');
     }
@@ -33,7 +37,7 @@ class TaskController extends BaseController {
     public function concluir() {
         $id = $_GET['id'] ?? '';
         if ($id != '') {
-            $this->model->toggle($id);
+            $this->model->toggle($id, $this->getUsuario());
         }
         $this->voltar('/');
     }
@@ -41,7 +45,7 @@ class TaskController extends BaseController {
     public function apagar() {
         $id = $_GET['id'] ?? '';
         if ($id != '') {
-            $this->model->excluir($id);
+            $this->model->excluir($id, $this->getUsuario());
         }
         $this->voltar('/');
     }
