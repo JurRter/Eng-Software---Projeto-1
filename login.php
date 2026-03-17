@@ -1,9 +1,35 @@
 <?php
 session_start();
-    $usuario = [
-        ["nome" => "admin", "senha" => "admin123"],
-        ["nome" => "user", "senha" => "user123"]
-    ];
+
+    $arquivoUsuarios = "usuarios.json";
+
+    function usuariosPadrao(): array {
+        return [
+            ["nome" => "admin", "senha" => password_hash("admin123", PASSWORD_DEFAULT)],
+            ["nome" => "user", "senha" => password_hash("user123", PASSWORD_DEFAULT)]
+        ];
+    }
+
+    function carregarUsuarios(string $arquivo): array {
+        if (!file_exists($arquivo)) {
+            $padrao = usuariosPadrao();
+            file_put_contents($arquivo, json_encode($padrao, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            return $padrao;
+        }
+
+        $conteudo = file_get_contents($arquivo);
+        $usuarios = json_decode($conteudo, true);
+
+        if (!is_array($usuarios)) {
+            $padrao = usuariosPadrao();
+            file_put_contents($arquivo, json_encode($padrao, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            return $padrao;
+        }
+
+        return $usuarios;
+    }
+
+    $usuario = carregarUsuarios($arquivoUsuarios);
 
     $mensagem = "";
 
@@ -13,9 +39,11 @@ session_start();
     $senhaCorreta = false;
 
     foreach ($usuario as $user) {
-        if ($user["nome"] === $nome) {
+        if (($user["nome"] ?? "") === $nome) {
             $existe = true;
-            if ($user["senha"] === $senha) {
+            $senhaSalva = $user["senha"] ?? "";
+
+            if (password_verify($senha, $senhaSalva) || $senhaSalva === $senha) {
                 $senhaCorreta = true;
                 break;
             }
@@ -44,7 +72,12 @@ session_start();
 <body>
   <h2>Login</h2>
 
-  <?php if ($mensagem !== ""): ?>
+    <?php if (!empty($_SESSION["cadastro_sucesso"])): ?>
+        <p><?php echo htmlspecialchars($_SESSION["cadastro_sucesso"]); ?></p>
+        <?php unset($_SESSION["cadastro_sucesso"]); ?>
+    <?php endif; ?>
+
+    <?php if ($mensagem !== ""): ?>
     <p><?php echo htmlspecialchars($mensagem); ?></p>
   <?php endif; ?>
 
@@ -53,5 +86,7 @@ session_start();
     <input type="password" name="senha" placeholder="Senha">
     <button type="submit">Entrar</button>
   </form>
+
+    <p><a href="registro.php">Criar conta</a></p>
 </body>
 </html>
