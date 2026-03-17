@@ -5,16 +5,14 @@ namespace App\Models;
 class TaskModel {
     private $arquivoJson = __DIR__ . '/../../tarefas.json';
 
-    // Pega tudo do JSON e já ordena
     public function todos() {
         if (!file_exists($this->arquivoJson)) return [];
-        
         $conteudo = file_get_contents($this->arquivoJson);
         $lista = json_decode($conteudo, true);
-        
-        // Deixa as não concluídas em cima
+        if (!is_array($lista)) return [];
+
         usort($lista, function($a, $b) {
-            return $a["concluida"] <=> $b["concluida"];
+            return ($a["concluida"] ?? false) <=> ($b["concluida"] ?? false);
         });
         
         return $lista;
@@ -33,8 +31,8 @@ class TaskModel {
     public function toggle($id) {
         $lista = $this->todos();
         foreach ($lista as &$item) {
-            if ($item['id'] == $id) {
-                $item['concluida'] = !$item['concluida'];
+            if (isset($item['id']) && $item['id'] == $id) {
+                $item['concluida'] = !($item['concluida'] ?? false);
                 break;
             }
         }
@@ -44,7 +42,11 @@ class TaskModel {
     public function excluir($id) {
         $lista = $this->todos();
         $novaLista = array_filter($lista, function($item) use ($id) {
-            return $item['id'] !== $id;
+            return isset($item['id']) && $item['id'] === $id;
+        });
+        // Ops, o array_filter acima pegou os que batem. Queremos os que NÃO batem.
+        $novaLista = array_filter($lista, function($item) use ($id) {
+            return !isset($item['id']) || $item['id'] !== $id;
         });
         $this->salvarNoArquivo(array_values($novaLista));
     }
