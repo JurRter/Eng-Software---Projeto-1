@@ -2,7 +2,6 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="criar_tarefa.css">
 <title>Criar Tarefa</title>
 
 </head>
@@ -33,13 +32,11 @@ if(isset($_POST["salvar"])){
 
 $tarefa = $_POST["tarefa"];
 
-// verificar se o arquivo existe
-if(file_exists("tarefas.json")){
-    $json = file_get_contents("tarefas.json");
-    $tarefas = json_decode($json, true);
-}else{
-    $tarefas = [];
-}
+// ler o arquivo json
+$json = file_get_contents("tarefas.json");
+
+// transformar json em array php
+$tarefas = json_decode($json, true);
 
 // nova tarefa
 $nova_tarefa = [
@@ -50,11 +47,12 @@ $nova_tarefa = [
 // adicionar na lista
 $tarefas[] = $nova_tarefa;
 
-// transformar em json
+// transformar de volta em json
 $json_final = json_encode($tarefas, JSON_PRETTY_PRINT);
 
 // salvar no arquivo
 file_put_contents("tarefas.json", $json_final);
+
 
 echo "<p>Tarefa criada: $tarefa</p>";
 
