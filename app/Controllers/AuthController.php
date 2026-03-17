@@ -14,7 +14,7 @@ class AuthController extends BaseController {
     }
 
     public function login() {
-        $this->view('auth/login');
+        $this->view('auth/login_style');
     }
 
     public function autenticar() {
@@ -29,12 +29,12 @@ class AuthController extends BaseController {
             $this->voltar('/');
         } else {
             $msg = !$usuario ? "Usuário não existe" : "Senha incorreta";
-            $this->view('auth/login', ['mensagem' => $msg]);
+            $this->view('auth/login_style', ['mensagem' => $msg]);
         }
     }
 
     public function registro() {
-        $this->view('auth/registro');
+        $this->view('auth/registro_style');
     }
 
     public function registrar() {
@@ -42,12 +42,12 @@ class AuthController extends BaseController {
         $senha = trim($_POST['senha'] ?? '');
 
         if ($nome == '' || $senha == '') {
-            $this->view('auth/registro', ['mensagem' => 'Preencha todos os campos!']);
+            $this->view('auth/registro_style', ['mensagem' => 'Preencha todos os campos!']);
             return;
         }
 
         if ($this->model->buscarPorNome($nome)) {
-            $this->view('auth/registro', ['mensagem' => 'Esse usuário já existe.']);
+            $this->view('auth/registro_style', ['mensagem' => 'Esse usuário já existe.']);
             return;
         }
 
