@@ -11,28 +11,11 @@
 
 <?php
 
-<<<<<<< HEAD
 $json = file_get_contents("tarefas.json");
 $tarefas = json_decode($json, true);
 
 if(empty($tarefas)){
 
-=======
-if(file_exists("tarefas.json")){
-    $json = file_get_contents("tarefas.json");
-    $tarefas = json_decode($json, true);
-}else{
-    $tarefas = [];
-}
-
-/* ordenar tarefas: pendentes primeiro */
-usort($tarefas, function($a, $b){
-    return $a["concluida"] <=> $b["concluida"];
-});
-
-if(empty($tarefas)){
-
->>>>>>> 661425500058c5573349781116996a8ed9be9257
     echo "<div class='vazio'>";
     echo "<h2>Nenhuma tarefa a fazer</h2>";
     echo "<a href='criar_tarefa.php'>
@@ -73,9 +56,6 @@ if(empty($tarefas)){
 }
 
 ?>
-<<<<<<< HEAD
 
-=======
->>>>>>> 661425500058c5573349781116996a8ed9be9257
 </body>
 </html>
