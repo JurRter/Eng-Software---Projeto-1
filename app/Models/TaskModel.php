@@ -47,14 +47,6 @@ class TaskModel {
         $this->salvarNoArquivo($listaInteira);
     }
 
-    public function excluir($id, $usuarioLogado) {
-        $listaInteira = $this->carregarTudo();
-        $novaLista = array_filter($listaInteira, function($item) use ($id, $usuarioLogado) {
-            // Mantém se: Não for o ID que queremos apagar OU não for desse usuário
-            return ($item['id'] ?? '') !== $id || ($item['usuario'] ?? '') !== $usuarioLogado;
-        });
-        $this->salvarNoArquivo(array_values($novaLista));
-    }
 
     private function carregarTudo() {
         if (!file_exists($this->arquivoJson)) return [];

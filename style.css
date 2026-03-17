@@ -1,21 +1,22 @@
+/* Reset básico e tipografia equilibrada */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-body{
-    background-color:#eef2f3;
+body {
+    background-color: #f4f6f8; /* Cor que o Brendo sugeriu */
     color: #333;
 }
 
-/* Header mais centralizado */
+/* Cabeçalho */
 .header {
     background: #fff;
     padding: 20px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .header-content {
@@ -27,21 +28,27 @@ body{
     padding: 0 20px;
 }
 
-.header h1 { font-size: 22px; color: #2c3e50; }
+.header h1 { font-size: 22px; color: #1e4ed8; }
+.header small { color: #666; }
 
+/* Botão "Nova Tarefa" - Versão Brendo (Floating + Style) */
 .btn-novo {
-    background: #3498db;
+    background-color: #2563eb;
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 12px 20px;
+    border-radius: 12px;
     font-weight: 600;
-    transition: 0.2s;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
 }
 
-.btn-novo:hover { background: #2980b9; }
+.btn-novo:hover {
+    background-color: #1e4ed8;
+    transform: translateY(-2px);
+}
 
-/* Board centralizado na tela */
+/* Board Centralizado (Nossa Estrutura) */
 .board-wrapper {
     display: flex;
     justify-content: center;
@@ -50,89 +57,123 @@ body{
 
 .board {
     display: flex;
-    gap: 30px;
-    max-width: 1000px;
+    gap: 25px;
+    max-width: 1100px;
     width: 100%;
     align-items: flex-start;
 }
 
 .coluna {
-    background: #dfe4ea;
-    flex: 1; /* Faz as colunas dividirem o espaço */
-    min-width: 320px;
-    border-radius: 8px;
+    background: #ebedf0; /* Cinza suave de board */
+    flex: 1;
+    min-width: 300px;
+    border-radius: 12px;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .coluna-topo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    padding: 0 5px;
+    margin-bottom: 20px;
+    padding: 5px;
 }
 
-.coluna-topo h2 { font-size: 15px; color: #57606f; font-weight: 700; text-transform: uppercase; }
-.coluna-topo.green h2 { color: #27ae60; }
+.coluna-topo h2 { 
+    font-size: 14px; 
+    color: #444; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.coluna-topo.green h2 { color: #166534; }
 
 .count {
-    background: #ced6e0;
-    color: #2f3542;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 13px;
+    background: #cbd5e1;
+    color: #1e293b;
+    padding: 3px 12px;
+    border-radius: 15px;
+    font-size: 12px;
     font-weight: bold;
 }
 
-/* Lista e Cards */
+/* Cards com o estilo do Brendo + Polimento */
 .lista-cards {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
 .card {
     background: white;
-    padding: 15px;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: 0.2s;
+    position: relative;
+    border-left: 6px solid #f59e0b; /* Laranja do Brendo */
+}
+
+.card.concluido {
+    border-left-color: #22c55e; /* Verde do Brendo */
+    opacity: 0.8;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito que o Brendo adicionou */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
 .card h3 {
     font-size: 16px;
-    font-weight: 500;
+    color: #1e293b;
     margin-bottom: 12px;
-    color: #2f3542;
 }
 
-.card.pendente { border-top: 4px solid #f39c12; }
-.card.concluido { border-top: 4px solid #2ecc71; opacity: 0.8; }
-.card.concluido h3 { text-decoration: line-through; color: #7f8c8d; }
+.card.concluido h3 {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
 
 .card-footer {
     display: flex;
     justify-content: flex-end;
-    gap: 15px;
-    border-top: 1px solid #f1f2f6;
-    padding-top: 10px;
+    gap: 18px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
 }
 
-.card-footer a { text-decoration: none; font-size: 16px; transition: 0.2s; }
-.btn-check { color: #2ecc71; }
-.btn-undo { color: #3498db; }
-.btn-delete { color: #e74c3c; }
+.card-footer a { 
+    text-decoration: none; 
+    font-size: 18px; 
+    transition: 0.2s; 
+}
 
-.card-footer a:hover { transform: scale(1.15); }
+.btn-check { color: #22c55e; }
+.btn-undo { color: #3b82f6; }
+.btn-delete { color: #ef4444; }
 
-/* Mensagem de vazio */
-.vazio { text-align: center; margin-top: 80px; }
-.vazio h2 { color: #2c3e50; margin-bottom: 10px; }
-.vazio p { color: #7f8c8d; margin-bottom: 25px; }
+.card-footer a:hover { transform: scale(1.2); }
+
+/* Vazio */
+.vazio { text-align: center; margin-top: 100px; }
+.vazio h2 { color: #1e293b; margin-bottom: 15px; }
+.vazio p { color: #64748b; margin-bottom: 30px; }
 
 .btn-adicionar {
-    background: #3498db; color: white; border: none; padding: 12px 30px; 
-    border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
 }
+
+.btn-adicionar:hover { background: #1e4ed8; }

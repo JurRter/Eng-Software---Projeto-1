@@ -42,11 +42,4 @@ class TaskController extends BaseController {
         $this->voltar('/');
     }
 
-    public function apagar() {
-        $id = $_GET['id'] ?? '';
-        if ($id != '') {
-            $this->model->excluir($id, $this->getUsuario());
-        }
-        $this->voltar('/');
-    }
 }
