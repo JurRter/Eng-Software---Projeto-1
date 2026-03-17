@@ -11,7 +11,10 @@
 
 <div class="header">
     <div class="header-content">
-        <h1>Board de Tarefas</h1>
+        <div>
+            <h1>Board de Tarefas</h1>
+            <small>Olá, <?= htmlspecialchars($_SESSION['usuario'] ?? 'Visitante') ?> | <a href="/logout" style="color: #eb5757; text-decoration: none; font-size: 12px;">Sair</a></small>
+        </div>
         <a href='/tarefas/criar' class="btn-novo">
             <i class="fa-solid fa-plus"></i> Nova Tarefa
         </a>

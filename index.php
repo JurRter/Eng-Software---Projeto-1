@@ -1,71 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<title>Gerenciamento de Tarefas</title>
-</head>
-
-<body>
-
 <?php
 
-if(file_exists("tarefas.json")){
-    $json = file_get_contents("tarefas.json");
-    $tarefas = json_decode($json, true);
-}else{
-    $tarefas = [];
-}
+require_once __DIR__ . '/app/Core/Router.php';
+require_once __DIR__ . '/app/Core/BaseController.php';
+require_once __DIR__ . '/app/Models/TaskModel.php';
+require_once __DIR__ . '/app/Models/UsuarioModel.php';
+require_once __DIR__ . '/app/Controllers/TaskController.php';
+require_once __DIR__ . '/app/Controllers/AuthController.php';
 
-/* ordenar tarefas: pendentes primeiro */
-usort($tarefas, function($a, $b){
-    return $a["concluida"] <=> $b["concluida"];
-});
+use App\Core\Router;
 
-if(empty($tarefas)){
+$app = new Router();
 
-    echo "<div class='vazio'>";
-    echo "<h2>Nenhuma tarefa a fazer</h2>";
-    echo "<a href='criar_tarefa.php'>
-            <button class='botao-central'>Criar tarefa</button>
-          </a>";
-    echo "</div>";
+// Rotas de Tarefas
+$app->add('GET', '/', 'TaskController@index');
+$app->add('GET', '/tarefas/criar', 'TaskController@nova');
+$app->add('POST', '/tarefas/salvar', 'TaskController@salvar');
+$app->add('GET', '/tarefas/concluir', 'TaskController@concluir');
+$app->add('GET', '/tarefas/deletar', 'TaskController@apagar');
 
+// Rotas de Usuário
+$app->add('GET', '/login', 'AuthController@login');
+$app->add('POST', '/login', 'AuthController@autenticar');
+$app->add('GET', '/registro', 'AuthController@registro');
+$app->add('POST', '/registro', 'AuthController@registrar');
+$app->add('GET', '/logout', 'AuthController@logout');
 
-}else{
-
-    echo "<div class='container'>";
-
-    foreach($tarefas as $tarefa){
-
-        $classe = "";
-
-        if($tarefa["concluida"]){
-            $classe = "concluida";
-        }
-
-        echo "<div class='card $classe'>";
-
-        echo "<h3>".$tarefa["nome"]."</h3>";
-
-        if($tarefa["concluida"]){
-            echo "<p>✅ Concluída</p>";
-        }else{
-            echo "<p>⏳ Pendente</p>";
-        }
-
-        echo "</div>";
-    }
-
-    echo "</div>";
-
-    echo "<a href='criar_tarefa.php'>
-            <button class='botao-criar'>Criar tarefa</button>
-          </a>";
-}
-
-?>
-
-</body>
-</html>
+$app->rodar();

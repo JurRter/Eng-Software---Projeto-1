@@ -9,6 +9,7 @@ class TaskController extends BaseController {
     private $model;
 
     public function __construct() {
+        $this->precisaLogar(); // Agora tem que estar logado!
         $this->model = new TaskModel();
     }
 
