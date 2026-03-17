@@ -1,69 +1,74 @@
-<?php
-// registro.php
-
+<?php 
 session_start();
+	$arquivoUsuarios = "usuarios.json";
+	$mensagem = "";
+	$nome = trim($_POST["nome"] ?? "");
+	$senha = trim($_POST["senha"] ??"");
+	if ($_SERVER["REQUEST_METHOD"] === "POST") {
+		if($nome === "" || $senha === "") {
+			$mensagem = "Preencha nome ou senha";
+		} else {
+			if (!file_exists("usuarios.json")) {
+				$usuarioIniciais = [
+					CriarUsuario("admin", "admin123"),
+					CriarUsuario("user", "user123")
+				];
+			}
+			file_put_contents("usuarios.json", json_encode($usuarioIniciais, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+		}
+		$usuarios = json_decode(file_get_contents("usuarios.json"), true);
+		if (!is_array($usuarios)) {
+		$usuarios = [];			
+		}
+		$existe = false;
+		foreach ($usuarios as $u) {
+			if (($u["nome"] ?? "") === $nome) {
+				$existe = true;
+				break;
+			}
+		}
 
-// Função para validar e registrar usuário
-function registrarUsuario($usuario, $senha) {
-    // Caminho do arquivo de usuários
-    $arquivoUsuarios = 'usuarios.txt';
+		if ($existe) {
+			$mensagem = "Usuário já existe.";
+		} else {
+			$usuarios[] = CriarUsuario($nome, $senha);
+			file_put_contents("usuarios.json", json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-    // Verifica se usuário já existe
-    $usuarios = file($arquivoUsuarios, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($usuarios as $linha) {
-        list($user, $pass) = explode(':', $linha);
-        if ($user === $usuario) {
-            return "Usuário já existe!";
-        }
-    }
+			$_SESSION["cadastro_sucesso"] = "Usuário cadastrado com sucesso. Faça login.";
+			header("Location: login.php");
+			exit;
+		}
+	}
 
-    // Salva novo usuário
-    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-    file_put_contents($arquivoUsuarios, "$usuario:$senhaHash\n", FILE_APPEND);
-    return "Usuário registrado com sucesso!";
-}
+	function CriarUsuario(string $nome, string $senha): array {
+		return [
+			"nome" => $nome,
+			"senha" => password_hash($senha, PASSWORD_DEFAULT)
+		];
+	}
 
-// Processa o formulário
-$msg = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario = trim($_POST['usuario'] ?? '');
-    $senha = trim($_POST['senha'] ?? '');
-
-    if ($usuario && $senha) {
-        $msg = registrarUsuario($usuario, $senha);
-    } else {
-        $msg = "Preencha todos os campos!";
-    }
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Registro</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; }
-        .container { max-width: 400px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 8px; }
-        input[type="text"], input[type="password"] { width: 100%; padding: 8px; margin: 8px 0; }
-        input[type="submit"] { width: 100%; padding: 10px; background: #007bff; color: #fff; border: none; border-radius: 4px; }
-        .msg { color: red; margin-bottom: 10px; }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Registro</title>
 </head>
 <body>
-<div class="container">
-    <h2>Registro de Usuário</h2>
-    <?php if ($msg): ?>
-        <div class="msg"><?= htmlspecialchars($msg) ?></div>
-    <?php endif; ?>
-    <form method="post">
-        <label for="usuario">Usuário:</label>
-        <input type="text" name="usuario" id="usuario" required>
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" id="senha" required>
-        <input type="submit" value="Registrar">
-    </form>
-    <p><a href="login.php">Já tem uma conta? Faça login</a></p>
-</div>
+	<h2>Registro</h2>
+
+	<?php if ($mensagem !== ""): ?>
+		<p><?php echo htmlspecialchars($mensagem); ?></p>
+	<?php endif; ?>
+
+	<form method="POST" action="">
+		<input type="text" name="nome" placeholder="Nome">
+		<input type="password" name="senha" placeholder="Senha">
+		<button type="submit">Cadastrar</button>
+	</form>
+
+	<p><a href="login.php">Voltar para login</a></p>
 </body>
 </html>
