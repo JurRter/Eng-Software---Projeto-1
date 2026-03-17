@@ -2,7 +2,6 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="criar_tarefa.css">
 <title>Criar Tarefa</title>
 
 </head>
