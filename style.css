@@ -1,0 +1,117 @@
+/* reset básico */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* corpo da página */
+body{
+    background-color:#f4f6f8;
+    padding:40px;
+}
+
+/* botão flutuante */
+.botao-criar{
+    position:fixed;
+    right:40px;
+    bottom:40px;
+
+    background-color:#2563eb;
+    color:white;
+    border:none;
+    padding:14px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+.botao-criar:hover{
+    background-color:#1e4ed8;
+}
+
+/* botão central */
+.botao-central{
+    background-color:#2563eb;
+    color:white;
+    border:none;
+    padding:14px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.botao-central:hover{
+    background-color:#1e4ed8;
+}
+
+/* container dos cards */
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+    row-gap:35px;
+<<<<<<< HEAD
+    max-width:900px;
+=======
+    
+>>>>>>> 661425500058c5573349781116996a8ed9be9257
+}
+
+/* card da tarefa */
+.card{
+    background:white;
+    width:220px;
+    padding:20px;
+<<<<<<< HEAD
+=======
+    margin: 20px;
+>>>>>>> 661425500058c5573349781116996a8ed9be9257
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:transform 0.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* título da tarefa */
+.card h3{
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+/* status */
+.card p{
+    font-size:14px;
+}
+
+/* tarefa concluída */
+.concluida{
+    border-left:6px solid #22c55e;
+}
+
+/* tarefa pendente */
+.card:not(.concluida){
+    border-left:6px solid #f59e0b;
+}
+
+/* tela sem tarefas */
+.vazio{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    text-align:center;
+}
+
+.vazio h2{
+    font-size:28px;
+    color:#444;
+}
