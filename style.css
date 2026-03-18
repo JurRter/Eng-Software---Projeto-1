@@ -19,13 +19,8 @@ body {
     margin-bottom: 30px;
 }
 
-.header-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+.botao-criar:hover{
+    background-color:#1e4ed8;
 }
 
 .header h1 { font-size: 22px; color: #1e4ed8; }

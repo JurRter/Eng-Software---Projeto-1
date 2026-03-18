@@ -40,10 +40,10 @@ O objetivo da atividade é praticar:
 ## Funcionalidades Implementadas
 Cada integrante desenvolveu pelo menos uma funcionalidade no sistema:
 
-- Feature 1 – (descrever funcionalidade)
-- Feature 2 – (descrever funcionalidade)
-- Feature 3 – (descrever funcionalidade)
-- Feature 4 – (descrever funcionalidade)
+- Feature 1 – login e registro (Brendo Henrique)
+- Feature 2 – Conclusão de tarefas(Samir Batista)
+- Feature 3 – Criação de atividades(Claudio Vasconcellos)
+- Feature 4 – (Otavio augusto)
 
 ---
 
