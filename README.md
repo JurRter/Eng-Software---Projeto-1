@@ -51,7 +51,7 @@ Cada integrante desenvolveu pelo menos uma funcionalidade no sistema:
 O desenvolvimento do projeto seguiu o modelo **GitFlow**, utilizando as seguintes branches:
 
 - `main` – versão estável do sistema
-- `develop` – integração das funcionalidades
+- `dev` – integração das funcionalidades
 - `feature/*` – desenvolvimento das features
 
 O histórico de desenvolvimento pode ser visualizado no **Network Graph do GitHub**.
