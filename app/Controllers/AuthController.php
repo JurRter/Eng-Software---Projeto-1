@@ -51,7 +51,7 @@ class AuthController extends BaseController {
             return;
         }
 
-        $this->model->cadastrar($nome, $senha);
+        $this->model->CriarUsuario($nome, $senha);
         $_SESSION['cadastro_sucesso'] = "Conta cadastrada! Pode logar.";
         $this->voltar('/login');
     }

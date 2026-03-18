@@ -16,22 +16,22 @@ class UsuarioModel {
         }
     }
 
-    public function todos() {
+    public function carregarUsuarios() {
         $conteudo = file_get_contents($this->arquivoJson);
         $usuarios = json_decode($conteudo, true);
         return is_array($usuarios) ? $usuarios : [];
     }
 
     public function buscarPorNome($nome) {
-        $usuarios = $this->todos();
+        $usuarios = $this->carregarUsuarios();
         foreach ($usuarios as $u) {
             if ($u['nome'] === $nome) return $u;
         }
         return null;
     }
 
-    public function cadastrar($nome, $senha) {
-        $usuarios = $this->todos();
+    public function CriarUsuario($nome, $senha) {
+        $usuarios = $this->carregarUsuarios();
         $usuarios[] = [
             "nome" => $nome,
             "senha" => password_hash($senha, PASSWORD_DEFAULT)
