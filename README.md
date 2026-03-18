@@ -75,7 +75,7 @@ No vídeo são apresentados:
 
 ### 1. Clonar o repositório
 ```
-git clone https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git
+git clone https://github.com/JurRter/Eng-Software---Projeto-1
 ```
 
 ### 2. Entrar na pasta do projeto
