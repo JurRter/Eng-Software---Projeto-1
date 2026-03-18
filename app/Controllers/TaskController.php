@@ -42,4 +42,33 @@ class TaskController extends BaseController {
         $this->voltar('/');
     }
 
+    public function editar() {
+        $id = $_GET['id'] ?? '';
+        $tarefa = $this->model->buscarPorId($id, $this->getUsuario());
+        
+        if (!$tarefa) {
+            $this->voltar('/'); // Se tentou editar algo que não existe, volta pra home
+        }
+        
+        $this->view('tasks/editar', ['tarefa' => $tarefa]);
+    }
+
+    public function atualizar() {
+        $id = $_POST['id'] ?? '';
+        $nome = trim($_POST['nome'] ?? '');
+        
+        if ($id && $nome != '') {
+            $this->model->atualizar($id, $nome, $this->getUsuario());
+        }
+        $this->voltar('/');
+    }
+
+    public function deletar() {
+        $id = $_GET['id'] ?? '';
+        
+        if ($id) {
+            $this->model->deletar($id, $this->getUsuario());
+        }
+        $this->voltar('/');
+    }
 }

@@ -46,7 +46,12 @@
                                 <div class="card-footer">
                                     <a href='/tarefas/concluir?id=<?= $tarefa["id"] ?>' class="btn-check" title="Finalizar">
                                         <i class="fa-solid fa-check"></i>
-                                    </i class="fa-solid fa-check"></i>
+                                    </a>
+                                    <a href='/tarefas/editar?id=<?= $tarefa["id"] ?>' title="Editar" style="color: #f59e0b;">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href='/tarefas/deletar?id=<?= $tarefa["id"] ?>' class="btn-delete" title="Apagar">
+                                        <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
                             </div>
@@ -68,6 +73,9 @@
                                 <div class="card-footer">
                                     <a href='/tarefas/concluir?id=<?= $tarefa["id"] ?>' class="btn-undo" title="Desfazer">
                                         <i class="fa-solid fa-rotate-left"></i>
+                                    </a>
+                                    <a href='/tarefas/deletar?id=<?= $tarefa["id"] ?>' class="btn-delete" title="Apagar">
+                                        <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
                             </div>
