@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-// Esse sistema de rotas é bem simples, só pra ligar a URL ao controlador certo
+// O roteador associa a URL ao Controller certo
 class Router {
     protected $rotas = [];
 
@@ -15,26 +15,29 @@ class Router {
     }
 
     public function rodar() {
-        $metodoAtual = $_SERVER['REQUEST_METHOD'];
-        $urlSalva = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $metodo = $_SERVER['REQUEST_METHOD'];
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Ajuste caso o projeto esteja rodando em subpasta
-        $urlSalva = str_replace('/public', '', $urlSalva);
-        if ($urlSalva == '') $urlSalva = '/';
+        if ($url == '') $url = '/';
 
-        foreach ($this->rotas as $rota) {
-            if ($rota['metodo'] === $metodoAtual && $rota['caminho'] === $urlSalva) {
-                // Divide 'Controller@Metodo'
-                [$classe, $metodo] = explode('@', $rota['funcao']);
+        // Se o arquivo existe (tipo CSS), o roteador não interfere
+        $arquivo = __DIR__ . '/../../' . ltrim($url, '/');
+        if ($url !== '/' && file_exists($arquivo) && !is_dir($arquivo)) {
+            return false;
+        }
+
+        foreach ($this->rotas as $r) {
+            if ($r['metodo'] === $metodo && $r['caminho'] === $url) {
+                [$classe, $acao] = explode('@', $r['funcao']);
                 $nomeClasse = "App\\Controllers\\$classe";
                 
                 $obj = new $nomeClasse();
-                $obj->$metodo();
+                $obj->$acao();
                 return;
             }
         }
 
         http_response_code(404);
-        echo "Ih! Essa página não existe.";
+        echo "404 - Essa página não existe.";
     }
 }

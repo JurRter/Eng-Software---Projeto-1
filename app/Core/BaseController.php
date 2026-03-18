@@ -13,4 +13,12 @@ class BaseController {
         header("Location: $url");
         exit;
     }
+
+    // Proteção para o nosso board
+    protected function precisaLogar() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (empty($_SESSION['logado'])) {
+            $this->voltar('/login');
+        }
+    }
 }

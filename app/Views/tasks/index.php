@@ -11,7 +11,10 @@
 
 <div class="header">
     <div class="header-content">
-        <h1>Board de Tarefas</h1>
+        <div>
+            <h1>Board de Tarefas</h1>
+            <small>Olá, <?= htmlspecialchars($_SESSION['usuario'] ?? 'Visitante') ?> | <a href="/logout" style="color: #eb5757; text-decoration: none; font-size: 12px;">Sair</a></small>
+        </div>
         <a href='/tarefas/criar' class="btn-novo">
             <i class="fa-solid fa-plus"></i> Nova Tarefa
         </a>
@@ -45,9 +48,6 @@
                                         <i class="fa-solid fa-check"></i>
                                     </i class="fa-solid fa-check"></i>
                                     </a>
-                                    <a href='/tarefas/deletar?id=<?= $tarefa["id"] ?>' class="btn-delete" onclick="return confirm('Apagar tarefa?')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -68,9 +68,6 @@
                                 <div class="card-footer">
                                     <a href='/tarefas/concluir?id=<?= $tarefa["id"] ?>' class="btn-undo" title="Desfazer">
                                         <i class="fa-solid fa-rotate-left"></i>
-                                    </a>
-                                    <a href='/tarefas/deletar?id=<?= $tarefa["id"] ?>' class="btn-delete" onclick="return confirm('Remover?')">
-                                        <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
                             </div>
