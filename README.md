@@ -40,9 +40,9 @@ O objetivo da atividade é praticar:
 ## Funcionalidades Implementadas
 Cada integrante desenvolveu pelo menos uma funcionalidade no sistema:
 
-- Feature 1 – Login e Registro (Brendo Henrique)
-- Feature 2 – Conclusão de Tarefas(Samir Batista)
-- Feature 3 – Criação de Atividades(Claudio Vasconcellos)
+- Feature 1 – Criação de Atividades(Claudio Vasconcellos)
+- Feature 2 – Login e Registro (Brendo Henrique)
+- Feature 3 – Conclusão de Tarefas(Samir Batista)
 - Feature 4 – Apagar e Editar Tarefa(Otavio augusto)
 
 ---
@@ -75,7 +75,7 @@ No vídeo são apresentados:
 
 ### 1. Clonar o repositório
 ```
-git clone https://github.com/JurRter/Eng-Software---Projeto-1
+git clone https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git
 ```
 
 ### 2. Entrar na pasta do projeto
