@@ -47,6 +47,36 @@ class TaskModel {
         $this->salvarNoArquivo($listaInteira);
     }
 
+    public function buscarPorId($id, $usuarioLogado) {
+        $listaInteira = $this->carregarTudo();
+        foreach ($listaInteira as $item) {
+            if (isset($item['id']) && $item['id'] == $id && ($item['usuario'] ?? '') === $usuarioLogado) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
+    public function atualizar($id, $novoNome, $usuarioLogado) {
+        $listaInteira = $this->carregarTudo();
+        foreach ($listaInteira as &$item) {
+            if (isset($item['id']) && $item['id'] == $id && ($item['usuario'] ?? '') === $usuarioLogado) {
+                $item['nome'] = $novoNome;
+                break;
+            }
+        }
+        $this->salvarNoArquivo($listaInteira);
+    }
+
+    public function deletar($id, $usuarioLogado) {
+        $listaInteira = $this->carregarTudo();
+        $listaFiltrada = array_filter($listaInteira, function($item) use ($id, $usuarioLogado) {
+            // Mantém na lista se o ID for diferente OU se não for do usuário logado
+            return !(isset($item['id']) && $item['id'] == $id && ($item['usuario'] ?? '') === $usuarioLogado);
+        });
+        $this->salvarNoArquivo(array_values($listaFiltrada));
+    }
+
 
     private function carregarTudo() {
         if (!file_exists($this->arquivoJson)) return [];

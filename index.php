@@ -16,6 +16,9 @@ $app->add('GET', '/', 'TaskController@index');
 $app->add('GET', '/tarefas/criar', 'TaskController@nova');
 $app->add('POST', '/tarefas/salvar', 'TaskController@salvar');
 $app->add('GET', '/tarefas/concluir', 'TaskController@concluir');
+$app->add('GET', '/tarefas/editar', 'TaskController@editar');
+$app->add('POST', '/tarefas/atualizar', 'TaskController@atualizar');
+$app->add('GET', '/tarefas/deletar', 'TaskController@deletar');
 
 // Rotas de Usuário
 $app->add('GET', '/login', 'AuthController@login');
