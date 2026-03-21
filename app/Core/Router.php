@@ -20,7 +20,6 @@ class Router {
         
         if ($url == '') $url = '/';
 
-        // Se o arquivo existe (tipo CSS), o roteador não interfere
         $arquivo = __DIR__ . '/../../' . ltrim($url, '/');
         if ($url !== '/' && file_exists($arquivo) && !is_dir($arquivo)) {
             return false;
