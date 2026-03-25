@@ -1,0 +1,188 @@
+/* Reset básico e tipografia equilibrada */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8; /* Cor que o Brendo sugeriu */
+    color: #333;
+}
+
+/* Cabeçalho */
+.header {
+    background: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.header small {
+    display: block;
+    margin-top: 4px;
+}
+
+.botao-criar:hover{
+    background-color:#1e4ed8;
+}
+
+.header h1 { font-size: 22px; color: #1e4ed8; }
+.header small { color: #666; }
+
+/* Botão "Nova Tarefa" - Versão Brendo (Floating + Style) */
+.btn-novo {
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.btn-novo:hover {
+    background-color: #1e4ed8;
+    transform: translateY(-2px);
+}
+
+/* Board Centralizado (Nossa Estrutura) */
+.board-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.board {
+    display: flex;
+    gap: 25px;
+    max-width: 1100px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.coluna {
+    background: #ebedf0; /* Cinza suave de board */
+    flex: 1;
+    min-width: 300px;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+}
+
+.coluna-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.coluna-topo h2 { 
+    font-size: 14px; 
+    color: #444; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.coluna-topo.green h2 { color: #166534; }
+
+.count {
+    background: #cbd5e1;
+    color: #1e293b;
+    padding: 3px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Cards com o estilo do Brendo + Polimento */
+.lista-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: 0.2s;
+    position: relative;
+    border-left: 6px solid #f59e0b; /* Laranja do Brendo */
+}
+
+.card.concluido {
+    border-left-color: #22c55e; /* Verde do Brendo */
+    opacity: 0.8;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito que o Brendo adicionou */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    font-size: 16px;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.card.concluido h3 {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+}
+
+.card-footer a { 
+    text-decoration: none; 
+    font-size: 18px; 
+    transition: 0.2s; 
+}
+
+.btn-check { color: #22c55e; }
+.btn-undo { color: #3b82f6; }
+.btn-delete { color: #ef4444; }
+
+.card-footer a:hover { transform: scale(1.2); }
+
+/* Vazio */
+.vazio { text-align: center; margin-top: 100px; }
+.vazio h2 { color: #1e293b; margin-bottom: 15px; }
+.vazio p { color: #64748b; margin-bottom: 30px; }
+
+.btn-adicionar {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-adicionar:hover { background: #1e4ed8; }
